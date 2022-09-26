@@ -1,7 +1,7 @@
-import { ArticleResponse } from "../../data/api/dto/articleResponse";
-import { ArticleList } from "../../domain/model/articleModel";
+import type { ArticleResponse } from "../../data/api/dto/articleResponse";
+import type { ArticleList } from "../../domain/model/articleModel";
 
-export function toModel(response: ArticleResponse): ArticleList {
+const toModel = (response: ArticleResponse): ArticleList => {
   return response.map((article) => {
     return {
       author: article.author || "",
@@ -10,3 +10,5 @@ export function toModel(response: ArticleResponse): ArticleList {
     }
   })
 }
+
+export default toModel

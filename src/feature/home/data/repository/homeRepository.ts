@@ -10,8 +10,8 @@ export function homeRepository(
   api: IHomeDataSource
 ): IHomeRepository {
   return {
-    getEverything(param) {
-      return api.getEverything(param)
+    async getEverything(param) {
+      return await api.getEverything(param)
     },
   }
 }

@@ -5,3 +5,8 @@ export type Article = {
 }
 
 export type ArticleList = Article[]
+
+export type GetArticleParam = {
+  limit: number;
+  keyword: string;
+}

@@ -1,3 +1,4 @@
 export type ArticleRequestParam = {
-  pageSize: number
+  pageSize: number;
+  q: string;
 }

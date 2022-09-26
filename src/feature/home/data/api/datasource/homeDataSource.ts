@@ -8,8 +8,13 @@ export interface IHomeDataSource {
 
 export function homeDataSource (): IHomeDataSource {
   return {
-    getEverything(limit) {
-      return axios.get(`/everything?pageSize=${limit}`)
+    async getEverything({pageSize, q}) {
+      try {
+        const response = await axios.get(`/everything?q=${q}&pageSize=${pageSize}`)
+        return response.data.articles
+      } catch(e) {
+        console.log(e)
+      }
     },
   }
 }
