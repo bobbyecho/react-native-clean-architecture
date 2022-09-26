@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, ListRenderItemInfo, Text } from "react-native";
+import { Alert, FlatList, ListRenderItemInfo, Text } from "react-native";
 import type { Article } from "../../domain/model/articleModel";
 import useArticles from "../useArticles";
 import ArticleItem from "./ArticleItem";
@@ -10,6 +10,12 @@ const ArticleList = () => {
   React.useEffect(() => {
     refresh()
   }, [])
+
+  React.useEffect(() => {
+    if (articleState.error && articleState.message) {
+      Alert.alert("error", articleState.message)
+    }
+  }, [articleState.error])
 
   const refresh = () => {
     fetchArticles()

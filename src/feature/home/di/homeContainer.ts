@@ -1,5 +1,5 @@
 import { homeDataSource } from "../data/api/datasource/homeDataSource";
-import { homeRepository } from "../data/repository/homeRepository";
+import { HomeRepositoryImpl } from "../data/repository/homeRepository";
 import { articleStore } from "../store/articleStore";
 import { getArticlesUseCase } from "../domain/usecase/getArticlesUseCase";
 
@@ -11,7 +11,7 @@ function dataSources() {
 
 function repositories() {
   return {
-    homeRepository: () => homeRepository(dataSources().homeDataSource())
+    homeRepository: () => new HomeRepositoryImpl(dataSources().homeDataSource())
   }
 }
 
@@ -23,7 +23,10 @@ function stores() {
 
 function useCases() {
   return {
-    getArticlesUseCase: () => getArticlesUseCase(repositories().homeRepository())
+    getArticlesUseCase: () => getArticlesUseCase(
+      repositories().homeRepository(),
+      stores().articleStore()
+    )
   }
 }
 

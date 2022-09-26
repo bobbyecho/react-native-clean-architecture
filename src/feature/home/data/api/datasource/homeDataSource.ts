@@ -1,20 +1,17 @@
+import type { AxiosError, AxiosPromise, AxiosResponse } from "axios"
+import type { BaseResponse } from "src/core/base/baseResponse"
 import axios from "../../../../../core/httpclient/axios"
 import type { ArticleRequestParam } from "../dto/articleRequest"
 import type { ArticleResponse } from "../dto/articleResponse"
 
 export interface IHomeDataSource {
-  getEverything(param: ArticleRequestParam): Promise<ArticleResponse>
+  getEverything(param: ArticleRequestParam): AxiosPromise<BaseResponse<ArticleResponse>>
 }
 
 export function homeDataSource (): IHomeDataSource {
   return {
-    async getEverything({pageSize, q}) {
-      try {
-        const response = await axios.get(`/everything?q=${q}&pageSize=${pageSize}`)
-        return response.data.articles
-      } catch(e) {
-        console.log(e)
-      }
+    getEverything(param) {
+      return axios.get(`/everything?q=${param.q}&pageSize=${param.pageSize}`)
     },
   }
 }
